@@ -1,0 +1,11 @@
+encoding "utf8";
+TTextMinerConfig {
+  Dictionary = "C:\\Users\\holyi\\source\\repos\\Syntax_an\\Syntax_an\\bin\\Debug\\mydict.gzt";
+  Output = {
+    Format = text;
+    File = "C:\\Users\\holyi\\source\\repos\\Syntax_an\\Syntax_an\\bin\\Debug\\tomita.out.temp";
+  }
+  Input = {
+    File = "C:\\Users\\holyi\\source\\repos\\Syntax_an\\Syntax_an\\bin\\Debug\\tomita.input.temp";
+  }
+}
