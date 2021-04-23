@@ -33,6 +33,7 @@
             this.CorrectedTextBox = new System.Windows.Forms.RichTextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.CorrectTextBtn = new System.Windows.Forms.Button();
             this.UploadTextBtn = new System.Windows.Forms.Button();
             this.LabelOriginalTxt = new System.Windows.Forms.Label();
             this.LabelChangedTxt = new System.Windows.Forms.Label();
@@ -45,7 +46,6 @@
             this.KBLayoutErrorCheckBox = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.TypoErrorCheckBox = new System.Windows.Forms.CheckBox();
-            this.CorrectTextBtn = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -61,6 +61,7 @@
             this.OriginalTextBox.Size = new System.Drawing.Size(357, 485);
             this.OriginalTextBox.TabIndex = 1;
             this.OriginalTextBox.Text = "";
+            this.OriginalTextBox.TextChanged += new System.EventHandler(this.OriginalTextBox_TextChanged);
             // 
             // SaveTextBtn
             // 
@@ -106,6 +107,16 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Анализ";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // CorrectTextBtn
+            // 
+            this.CorrectTextBtn.Location = new System.Drawing.Point(215, 514);
+            this.CorrectTextBtn.Name = "CorrectTextBtn";
+            this.CorrectTextBtn.Size = new System.Drawing.Size(145, 33);
+            this.CorrectTextBtn.TabIndex = 7;
+            this.CorrectTextBtn.Text = "Исправить текст";
+            this.CorrectTextBtn.UseVisualStyleBackColor = true;
+            this.CorrectTextBtn.Click += new System.EventHandler(this.CorrectTextBtn_Click);
             // 
             // UploadTextBtn
             // 
@@ -272,16 +283,6 @@
             this.TypoErrorCheckBox.Text = "Орфография";
             this.TypoErrorCheckBox.UseVisualStyleBackColor = true;
             this.TypoErrorCheckBox.CheckedChanged += new System.EventHandler(this.TypoErrorCheckBox_CheckedChanged);
-            // 
-            // CorrectTextBtn
-            // 
-            this.CorrectTextBtn.Location = new System.Drawing.Point(215, 514);
-            this.CorrectTextBtn.Name = "CorrectTextBtn";
-            this.CorrectTextBtn.Size = new System.Drawing.Size(145, 33);
-            this.CorrectTextBtn.TabIndex = 7;
-            this.CorrectTextBtn.Text = "Исправить текст";
-            this.CorrectTextBtn.UseVisualStyleBackColor = true;
-            this.CorrectTextBtn.Click += new System.EventHandler(this.CorrectTextBtn_Click);
             // 
             // Form1
             // 

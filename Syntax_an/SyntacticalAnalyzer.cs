@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Syntax_an.WordErrors;
+using Syntax_an.SentenceEditor;
 
 namespace Syntax_an
 {
@@ -38,18 +39,21 @@ namespace Syntax_an
         public string TomitaOut { get; set; }
         public string WordSeparators = " ,!?.";
         public ISentenceSegmenter Segmenter { get; set; }
-
+        public string IncorrectWordsRegexp { get; private set; }
+        
         public string Correct()
         {
             List<IWordError> errSeq = GetErrorSeq();
             string[] sentences = Segmenter.GetSentences();
             string correctText = "";
+            List<string> IncorrectWords = new List<string>();
 
             for (int j = 0; j < sentences.Length; j++)
             {
                 string sentence = sentences[j];
-                string correctSentence = "";
                 string word = "";
+                string incorrectWord = "";
+                SimpleEditor sed = new SimpleEditor();
 
                 for (int i = 0; i < sentence.Length; i++)
                 {
@@ -59,20 +63,28 @@ namespace Syntax_an
                         word += letter;
                     } else if (word.Length != 0)
                     {
+                        incorrectWord = word;
                         word = CorrectWord(word, errSeq);
-                        //TODO: место для внесения информации об изменениях в отчет
-                        // Погуглить логирование. Подумать над вариантом со статическим классом
-                        correctSentence += word + letter;
+
+                        if (incorrectWord != word)
+                        {
+                            Logger.Write(incorrectWord, word);
+                            IncorrectWords.Add(incorrectWord);
+                        }
+
+                        sed.Add(word);
+                        sed.Add(letter);
                         word = "";
                     } else
                     {
-                        correctSentence += letter;
+                        sed.Add(letter);
                     }
                 }
 
-                correctText += correctSentence;
+                correctText += sed.Get();
             }
 
+            IncorrectWordsRegexp = String.Join("|", IncorrectWords);
             return correctText;
         }
 

@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Text.RegularExpressions;
+using static Syntax_an.Logger;
 
 namespace Syntax_an
 {
@@ -15,6 +17,7 @@ namespace Syntax_an
     {
         private SyntacticalAnalyzer analyzer;
         private ISentenceSegmenter sentenceSegmenter;
+        static string text = "";
 
         public Form1()
         {
@@ -27,7 +30,17 @@ namespace Syntax_an
             };
             analyzer.Segmenter = sentenceSegmenter;
         }
-
+        public void RepaintOriginalTextBox(RichTextBox ortb)
+        {
+            // TODO: сбрасывать красный цевт
+            Regex regExp = new Regex(analyzer.IncorrectWordsRegexp);
+            foreach (Match match in regExp.Matches(ortb.Text))
+            {
+                ortb.Select(match.Index, match.Length);
+                ortb.SelectionColor = Color.Red;
+            }
+                
+        }
         private void SaveText_Click(object sender, EventArgs e)
         {
             try {
@@ -39,6 +52,7 @@ namespace Syntax_an
                     {
                         sw.Write(CorrectedTextBox.Text);
                     }
+                    EndOfLogging();
                 }
             } catch (Exception ex)
             {
@@ -119,6 +133,13 @@ namespace Syntax_an
         {
             File.WriteAllText(sentenceSegmenter.InputFileName, OriginalTextBox.Text);
             CorrectedTextBox.Text = analyzer.Correct();
+            RepaintOriginalTextBox(OriginalTextBox);
+
+        }
+
+        private void OriginalTextBox_TextChanged(object sender, EventArgs e)
+        {
+            
         }
     }
 }
