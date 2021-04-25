@@ -10,38 +10,41 @@ namespace Syntax_an.SentenceEditor
     {
         public SimpleEditor()
         {
-            sentence = new List<string>();
+            sentence = new Sentence();
             editors = new List<ICommaEditor>
             {
-                // TODO: здесь список редакторов
+                // TODO: сделать отдельный редактор, убирающий пробелы в "во - первых" и т.д.
+                new ChtoCommaEditor(),
+                new IntroductoryWordsCommaEditor(),
             };
         }
 
         public void Add(string word)
         {
-            // TODO: вызывать анализаторы запятых
-            /**
-             * Что-то вроде
-             * for editor in editors:
-             *   editor.correct(sentence, word)
-             */
+            foreach (var e in editors)
+            {
+                e.Edit(sentence, word);
+            }
             sentence.Add(word);
         }
 
         public void Add(char symbol)
         {
-            // TODO: вызывать анализаторы запятых
-            sentence.Add(symbol.ToString());
+            foreach (var e in editors)
+            {
+                e.Edit(sentence, symbol);
+            }
+            sentence.Add(symbol);
         }
 
         public string Get()
         {
             // TODO: если небходимо, тут можно сделать дополнительный
-            // аналих всего предложения
-            return String.Concat(sentence);
+            // анализ всего предложения
+            return sentence.Get();
         }
 
-        private List<string> sentence;
+        private Sentence sentence;
         private List<ICommaEditor> editors;
     }
 }
