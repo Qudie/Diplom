@@ -46,39 +46,53 @@ namespace Syntax_an.SentenceEditor
             return null;
         }
 
-        // Исрпавление всего предложения
+        // После каждого вводного слова, кроме последнего, вставляем запятую, если она не была поставлена пользователем.
         public void Edit(Sentence sentence)
         {
-            
+
+           
+            for (Sentence.Member iter = sentence.PrevWord(sentence.LastWord());
+                iter != null;
+                iter = sentence.PrevWord(iter))
+            {
+                if(simpleWords.Contains(iter.Symbols.ToLower()))
+                {
+                    if (GetFollowingComma(sentence, iter) != null)
+                    {
+                        continue;
+                    }
+                    sentence.InsertAfter(iter, ','); 
+                }
+
+            }
+
+
         }
 
-        // Исправление предложения перед добавлением нового слова
+        // Если добавляемое слово вводное, после последнего слова добавляем запятую, если она не была поставлена пользователем.
         public void Edit(Sentence sentence, string word)
         {
-            if (!word.Contains(word.ToLower()))
+            if (!simpleWords.Contains(word.ToLower()))
             {
                 return;
             }
-
-            // TODO: Поставить запятую - всегда
+            
+            if (sentence.NoWords())
+            {
+                return;
+            }
+            
+            var lastWord = sentence.LastWord();
+            if (GetFollowingComma(sentence, lastWord) == null)
+            {
+                sentence.InsertAfter(lastWord, ',');
+            }
+            
         }
 
         public void Edit(Sentence sentence, char symbol)
         {
-            // Удалить запятую после последнего слова, если она есть
-            if (symbol != ',')
-            {
-                return;
-            }
-
-            var lastWord = sentence.LastWord();
-            var lastComma = GetFollowingComma(sentence, lastWord);
-            if (lastComma == null)
-            {
-                return;
-            }
-
-            sentence.Remove(lastComma);
+            
         }
     }
 }

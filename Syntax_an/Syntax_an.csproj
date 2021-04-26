@@ -52,6 +52,7 @@
     <Compile Include="SentenceEditor\IntroductoryWordsCommaEditor.cs" />
     <Compile Include="SentenceEditor\Sentence.cs" />
     <Compile Include="SentenceEditor\SimpleEditor.cs" />
+    <Compile Include="SentenceEditor\UnionANOComma.cs" />
     <Compile Include="WordErrors\DamerauLevenshtein.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

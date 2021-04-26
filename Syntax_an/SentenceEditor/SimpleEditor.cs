@@ -16,6 +16,7 @@ namespace Syntax_an.SentenceEditor
                 // TODO: сделать отдельный редактор, убирающий пробелы в "во - первых" и т.д.
                 new ChtoCommaEditor(),
                 new IntroductoryWordsCommaEditor(),
+                new UnionANOComma(),
             };
         }
 
@@ -39,8 +40,11 @@ namespace Syntax_an.SentenceEditor
 
         public string Get()
         {
-            // TODO: если небходимо, тут можно сделать дополнительный
-            // анализ всего предложения
+            
+            foreach (var e in editors)
+            {
+                e.Edit(sentence);
+            }
             return sentence.Get();
         }
 
