@@ -34,6 +34,8 @@ namespace Syntax_an.SentenceEditor
 
         public KakCommaEditor()
         {
+            // повторяющиеся слова
+
             var kak = new Sentence.MatchMember {
                 Symbols = "как",
                 Type = Sentence.MatchMember.MatchType.WORD,
@@ -51,21 +53,15 @@ namespace Syntax_an.SentenceEditor
                 Type = Sentence.MatchMember.MatchType.WORD,
             };
 
+            var v = new Sentence.MatchMember
+            {
+                Symbols = "в",
+                Type = Sentence.MatchMember.MatchType.WORD,
+            };
+
             var c = new Sentence.MatchMember
             {
                 Symbols = "с",
-                Type = Sentence.MatchMember.MatchType.WORD,
-            };
-
-            var tex = new Sentence.MatchMember
-            {
-                Symbols = "тех",
-                Type = Sentence.MatchMember.MatchType.WORD,
-            };
-
-            var togo = new Sentence.MatchMember
-            {
-                Symbols = "того",
                 Type = Sentence.MatchMember.MatchType.WORD,
             };
 
@@ -80,16 +76,201 @@ namespace Syntax_an.SentenceEditor
                 Type = Sentence.MatchMember.MatchType.ANY_SYMBOL,
             };
 
+            var togo = new Sentence.MatchMember
+            {
+                Symbols = "того",
+                Type = Sentence.MatchMember.MatchType.WORD,
+            };
+
+
+            // неповторяющиеся слова
+
+            var ni = new Sentence.MatchMember
+            {
+                Symbols = "ни",
+                Type = Sentence.MatchMember.MatchType.WORD,
+            };
+
+            var chem = new Sentence.MatchMember
+            {
+                Symbols = "чем",
+                Type = Sentence.MatchMember.MatchType.WORD,
+            };
+
+            var bivalo = new Sentence.MatchMember
+            {
+                Symbols = "бывало",
+                Type = Sentence.MatchMember.MatchType.WORD,
+            };
+
+            var pochti = new Sentence.MatchMember
+            {
+                Symbols = "почти",
+                Type = Sentence.MatchMember.MatchType.WORD,
+            };
+
+            var vrode = new Sentence.MatchMember
+            {
+                Symbols = "вроде",
+                Type = Sentence.MatchMember.MatchType.WORD,
+            };
+
+            var toch_v_toch = new Sentence.MatchMember
+            {
+                Symbols = "точь-в-точь",
+                Type = Sentence.MatchMember.MatchType.WORD,
+            };
+
+            var sovsem = new Sentence.MatchMember
+            {
+                Symbols = "совсем",
+                Type = Sentence.MatchMember.MatchType.WORD,
+            };
+
+            var sovershenno = new Sentence.MatchMember
+            {
+                Symbols = "совершенно",
+                Type = Sentence.MatchMember.MatchType.WORD,
+            };
+
+            var prosto = new Sentence.MatchMember
+            {
+                Symbols = "просто",
+                Type = Sentence.MatchMember.MatchType.WORD,
+            };
+
+            var imenno = new Sentence.MatchMember
+            {
+                Symbols = "именно",
+                Type = Sentence.MatchMember.MatchType.WORD,
+            };
+
+            var tex = new Sentence.MatchMember
+            {
+                Symbols = "тех",
+                Type = Sentence.MatchMember.MatchType.WORD,
+            };
+
+            var por = new Sentence.MatchMember
+            {
+                Symbols = "пор",
+                Type = Sentence.MatchMember.MatchType.WORD,
+            };
+
+            var vremeni = new Sentence.MatchMember
+            {
+                Symbols = "времени",
+                Type = Sentence.MatchMember.MatchType.WORD,
+            };
+
+            var po = new Sentence.MatchMember
+            {
+                Symbols = "по",
+                Type = Sentence.MatchMember.MatchType.WORD,
+            };
+
+            var mere = new Sentence.MatchMember
+            {
+                Symbols = "мере",
+                Type = Sentence.MatchMember.MatchType.WORD,
+            };
+
+            var menshe = new Sentence.MatchMember
+            {
+                Symbols = "меньше",
+                Type = Sentence.MatchMember.MatchType.WORD,
+            };
+
+            var bolshe = new Sentence.MatchMember
+            {
+                Symbols = "больше",
+                Type = Sentence.MatchMember.MatchType.WORD,
+            };
+
+            var gol = new Sentence.MatchMember
+            {
+                Symbols = "гол",
+                Type = Sentence.MatchMember.MatchType.WORD,
+            };
+
+            var sokol = new Sentence.MatchMember
+            {
+                Symbols = "сокол",
+                Type = Sentence.MatchMember.MatchType.WORD,
+            };
+
+            var belka = new Sentence.MatchMember
+            {
+                Symbols = "белка",
+                Type = Sentence.MatchMember.MatchType.WORD,
+            };
+
+            var kolese = new Sentence.MatchMember
+            {
+                Symbols = "колесе",
+                Type = Sentence.MatchMember.MatchType.WORD,
+            };
+
+
             noCommaKaks = new List<List<Sentence.MatchMember>>
             {
+                // как ни в чем не бывало
+                new List<Sentence.MatchMember> { kak, ni, v, chem, ne, bivalo },
+
+                // почти как
+                new List<Sentence.MatchMember> { pochti, kak },
+
+                // вроде как
+                new List<Sentence.MatchMember> { vrode, kak },
+
+                // как можно
+                new List<Sentence.MatchMember> { kak, mozno },
+
+                // точь-в-точь как
+                new List<Sentence.MatchMember> { toch_v_toch, kak },
+
                 // не как
                 new List<Sentence.MatchMember> { ne, kak },
+
+                // совсем как
+                new List<Sentence.MatchMember> { sovsem, kak },
+
+                // совершенно как
+                new List<Sentence.MatchMember> { sovershenno, kak },
+
+                // просто как
+                new List<Sentence.MatchMember> { prosto, kak },
+
+                // именно как
+                new List<Sentence.MatchMember> { imenno, kak },
 
                 // так как
                 new List<Sentence.MatchMember> { tak, kak },
 
                 // как так
                 new List<Sentence.MatchMember> { kak, tak },
+
+                // с тех пор как
+                new List<Sentence.MatchMember> { c, tex, por, kak },
+
+                // с того времени как
+                new List<Sentence.MatchMember> { c, togo, vremeni, kak},
+
+                // по мере того как
+                new List<Sentence.MatchMember> { po, mere, togo, kak },
+
+                // как можно меньше
+                new List<Sentence.MatchMember> { kak, mozno, menshe },
+
+                // как можно больше
+                new List<Sentence.MatchMember> { kak, mozno, bolshe },
+
+                // гол как сокол
+                new List<Sentence.MatchMember> { gol, kak, sokol },
+
+                // как белка в колесе
+                new List<Sentence.MatchMember> { kak, belka, v, kolese },
+
             };
         }
 
