@@ -17,6 +17,8 @@ namespace Syntax_an.SentenceEditor
                 new ChtoCommaEditor(),
                 new IntroductoryWordsCommaEditor(),
                 new UnionANOComma(),
+                new IfThenCommaEditor(),
+                new KakCommaEditor(),
             };
         }
 

@@ -49,8 +49,6 @@ namespace Syntax_an.SentenceEditor
         // После каждого вводного слова, кроме последнего, вставляем запятую, если она не была поставлена пользователем.
         public void Edit(Sentence sentence)
         {
-
-           
             for (Sentence.Member iter = sentence.PrevWord(sentence.LastWord());
                 iter != null;
                 iter = sentence.PrevWord(iter))

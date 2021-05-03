@@ -26,6 +26,21 @@ namespace Syntax_an.SentenceEditor
             public string Symbols { get; set; }
         }
 
+        public class MatchMember
+        {
+            public enum MatchType
+            {
+                WORD,
+                ANY_SYMBOL, // Not supported yet
+                ANY,        // Not supported yet
+                ANY_WORD,   // Not supported yet
+                SYMBOL,     // Not supported yet
+            }
+
+            public MatchType Type { get; set; }
+            public string Symbols { get; set; }
+        }
+
         public Sentence()
         {
             sentence = new List<Member>();
@@ -157,7 +172,7 @@ namespace Syntax_an.SentenceEditor
             return null;
         }
 
-        public void Insert(Member m, string word)
+        public void InsertAfter(Member m, string word)
         {
             Member newM = new Member(m.Index+1)
             {
@@ -193,6 +208,45 @@ namespace Syntax_an.SentenceEditor
                 sentence[i].Index--;
             }
             sentence.RemoveAt(m.Index);
+        }
+
+        public Member GetSubsentence(List<MatchMember> match)
+        {
+            Member subsentenceStart = null;
+            int curMatchMemberIdx = 0;
+
+            for (Member iter = FirstWord();
+                 iter != null; 
+                 iter = Next(iter))
+            {
+                MatchMember curMatchMember = match[curMatchMemberIdx];
+                switch (iter.Type)
+                {
+                    case Member.MemberType.SYMBOL:
+                        break;
+                    case Member.MemberType.WORD:
+                        if (curMatchMember.Type != MatchMember.MatchType.WORD ||
+                            curMatchMember.Symbols.ToLower() != iter.Symbols)
+                        {
+                            curMatchMemberIdx = 0;
+                            subsentenceStart = null;
+                            break;
+                        }
+
+                        curMatchMemberIdx++;
+                        if (subsentenceStart == null)
+                        {
+                            subsentenceStart = iter;
+                        }
+                        if (curMatchMemberIdx == match.Count)
+                        {
+                            return subsentenceStart;
+                        }
+                        break;
+                }
+            }
+
+            return subsentenceStart;
         }
 
         private List<Member> sentence;
